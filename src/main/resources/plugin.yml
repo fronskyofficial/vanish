@@ -1,0 +1,12 @@
+name: '${plugin_name}'
+version: '${plugin_version}'
+main: '${plugin_main_class}'
+api-version: 1.13
+authors: ['Fronsky Inc']
+website: 'https://fronsky.com/resources/vanish'
+description: 'This is the Fronsky Vanish plugin.'
+
+commands:
+  vanish:
+    aliases: ['v']
+    permission: 'vanish.cmd.vanish'

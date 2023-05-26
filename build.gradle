@@ -1,0 +1,86 @@
+plugins {
+    id 'java'
+}
+
+def plugin_name = 'Vanish'
+def plugin_group = 'com.fronsky'
+def plugin_version = '1.2'
+def spigot_version = '1.13'
+def java_version = 8
+
+group = plugin_group
+version = plugin_version
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:${spigot_version}-R0.1-SNAPSHOT"
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+    testImplementation platform('org.junit:junit-bom:5.9.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(java_version)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(java_version))
+    }
+}
+
+compileJava {
+    options.compilerArgs += ["-parameters"]
+}
+
+jar {
+    manifest {
+        attributes('Main-Class': "${plugin_group}.${plugin_name.toLowerCase()}.Main")
+        attributes('Implementation-Version': plugin_version)
+        attributes('Implementation-Vendor': 'Fronsky Inc')
+        attributes('Built-By': 'Fronsky Inc')
+        attributes('Created-By': 'IntelliJ IDEA 2023.1.2')
+    }
+    archiveBaseName.set(plugin_name)
+    archiveVersion.set(plugin_version)
+}
+
+wrapper {
+    gradleVersion = '8.1.1'
+}
+
+processResources {
+    doFirst {
+        file("$buildDir/resources/main").listFiles().each {
+            it.delete()
+        }
+    }
+
+    def props = [plugin_name: plugin_name, plugin_main_class: "${plugin_group}.${plugin_name.toLowerCase()}.Main", plugin_version: plugin_version, spigot_version: spigot_version, java_version: java_version]
+    inputs.properties(props)
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (java_version >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(java_version)
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,20 @@
+# Official Fronsky Vanish plugin messages.yml file.
+# Copyright 2023 Fronsky Inc. All rights reserved.
+# https://www.fronsky.com/resources/vanish/messages
+
+version: '1.0'
+player_joined_vanished: '&e<player> has joined vanished and silently.'
+player_quit_vanished: '&e<player> has quit vanished.'
+player_vanished: '&e<player> has vanished. Poof!'
+player_visible: '&e<player> has become visible.'
+
+self_player_vanished: '&aYou have successfully vanished &2<player>.'
+self_player_visible: '&aYou have successfully made &2<player> &avisible.'
+self_joined_vanished: '&3You have joined vanished. To appear type: /vanish!'
+self_vanished: '&3You have vanished. Poof!'
+self_visible: '&3You have become visible.'
+
+sound_enable: '&aYou have enabled the vanish sound!'
+sound_disable: '&aYou have disabled the vanish sound!'
+
+reload: '&aThe Vanish plugin has been reloaded!'

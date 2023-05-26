@@ -1,0 +1,7 @@
+# Official Fronsky Vanish plugin config.yml file.
+# Copyright 2023 Fronsky Inc. All rights reserved.
+# https://www.fronsky.com/resources/vanish/config
+
+version: '1.0'
+sound_enabled: true
+disabled_actions_enabled: true

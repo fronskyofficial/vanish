@@ -1,3 +1,3 @@
 # Fronsky Vanish
 
-Expose cheaters or stay hidden with our top-rated free vanish plugin.
+Expose cheaters or vanish discreetly with our acclaimed plugin.
